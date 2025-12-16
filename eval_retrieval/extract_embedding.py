@@ -1303,7 +1303,7 @@ class XLMRobertaLanguageBackbone(nn.Module):
         msg = self.load_state_dict(new_state_dict, strict=True)
         print(msg)
 
-        print("WECLIP TEXT-ENCODER xlm-roberta-base LOADING WEIGHTS !!!!")
+        print("EXT-ENCODER xlm-roberta-base LOADING WEIGHTS !!!!")
 
 
 
