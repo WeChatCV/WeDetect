@@ -69,10 +69,10 @@ torchrun --nproc-per-node=8 --nnodes=1 --node_rank=0 --master_addr="127.0.0.1" -
 - In Stage3, users shoulf first extract 100 proposes per image and saving the results in a json file. 
 
 ```
-[
+{
   "file1": proposal list1, #[[x1y1x2y2], [x1y1x2y2], ...]
   "file2": proposal list2,
-]
+}
 ```
 
 - The data format for Stage3 is:
