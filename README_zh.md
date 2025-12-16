@@ -122,7 +122,7 @@ bash dist_test.sh config/wedetect_base.py /PATH/TO/WEDETECT 8
 cd eval_recall
 torchrun --nproc-per-node=8 --nnodes=1 --node_rank=0 --master_addr="127.0.0.1" --master_port=29500 eval_recall.py --wedetect_uni_checkpoint wedetect_base_uni.pth --dataset coco
 ```
-- 请您修改`eval_recall/eval_recall.py`中第1400的数据路径
+- 请您修改`eval_recall/eval_recall.py`中第10的数据路径
 - Dataset的选项可为`coco`，`lvis`和`paco`
 
 ```
