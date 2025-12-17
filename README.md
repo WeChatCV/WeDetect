@@ -60,6 +60,7 @@ mmdet==3.3.0
 mmengine==0.10.7
 ```
 
+- MMCV series packages are not required for WeDetect-Ref users.
 - Install the environment as follows.
 
 ```
