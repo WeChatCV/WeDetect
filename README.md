@@ -80,6 +80,11 @@ mim install mmcv==2.1.0
 mim install mmdet==3.3.0
 ```
 
+- We found that installing `MMCV` can be challenging. Here are some helpful resources to assist with the installation:
+  - https://github.com/open-mmlab/mmcv/issues/3303
+  - https://github.com/open-mmlab/mmcv/issues/3327
+  - https://github.com/open-mmlab/mmcv/issues/3319
+- Both `mmcv==2.1.0`, `mmcv==2.2.0` and many other versions of PyTorch are compatible and work well.
 
 
 ## ⭐ Demo
