@@ -120,6 +120,7 @@ python infer_wedetect_ref.py --wedetect_ref_checkpoint /PATH/TO/WEDETECT_REF --w
 ```
 
 - WeDetect-Ref is a multilingual model. You can use either Chinese or English queries for testing, but only one query can be provided at a time.
+- Our model is trained with WeDetect-Base-Uni. It is recommended to use the same one during inference.
 
 <p align="left">
     <img src="./assets/pred_wedetect_ref_4b.png" width="800px">
