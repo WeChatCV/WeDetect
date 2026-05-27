@@ -106,7 +106,7 @@ python infer_wedetect_ref.py --wedetect_ref_checkpoint /PATH/TO/WEDETECT_REF --w
 </p>
 
 - WeDetect-Ref是一个多语言模型，您可以使用中文或者英文表达式进行测试，但是每次仅能传入一个表达式。
-
+- WeDetect-Ref基于WeDetect-Base-Uni训练，测试时应使用WeDetect-Base-Uni作为候选框提取网络。
 
 
 ## 📏 评测
