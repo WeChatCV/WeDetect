@@ -164,7 +164,7 @@ python3 retrieval_metric.py --model wedetect --dataset coco --thre 0.2
 
 
 
-## Finetune WeDetect on a Custom Dataset
+## 🚀 Finetune WeDetect on a Custom Dataset
 
 - Please origanize your dataset in the COCO format. And provide a classname file in `Chinese` similar to `data/texts/coco_zh_class_texts.json`.
 - Below, we use COCO2017 as an example. We finetune WeDetect-Base with 8 GPUs (24G or less is OK), four images per device, and 12 epochs.
@@ -199,6 +199,37 @@ bash dist_train.sh config/wedetect_base_coco_vision_encoder_8xbs4_2e-5.py 8
 | WeDetect-Base (OV-finetuning) | 55.7              | 73.3           | 60.8           | 38.0           | 61.1             | 72.8 |
 | WeDetect-Base (OV-finetuning mask refine) | 55.8  | 73.4           | 61.0           | 38.5           | 61.0             | 72.8 |
 | WeDetect-Base (CS-finetuning) | 56.2              | 73.9           | 61.6           | 39.1           | 61.7             | 73.7 |
+
+
+## 🚀 Finetune WeDetect-Uni on a Custom Dataset
+
+#### 📍 Prepare your dataset
+- Please origanize your dataset in the COCO format.
+- The dataset should contain only the single class: `object`, defined in the categories as:
+    ```
+    [{'id': 0, 'synset': 'object', 'name': 'object'}]
+    ```
+- The `category_id` for every annotation must be set to 0.
+
+#### 📍 Training
+```
+bash dist_train.sh config/wedetect_uni_base_finetune.py 8
+```
+- You should adjust the training hyperparameters manually.
+- By default, the entire detector is frozen unless the prompts are trainable. You can unfreeze certain parts of the detector to improve performance, but doing so may cause the object embeddings to become misaligned with the text embeddings.
+- Below is the reference performance of our model fine-tuned on the COCO dataset, using default (untuned) training hyperparameters.
+
+| Trainable parameters     | AR@100 | AR@300 | 
+| ----------------------------- | ----------------- | ----------------- |
+| None (Zero-shot)     | 66.9              | 69.6           |
+| prompt | 67.6              | 69.6          |
+| prompt + head | 68.7  | 70.2           |
+| prompt + head + neck | 69.6              | 71.0           |
+
+#### 📍 Evaluation
+```
+bash dist_test.sh config/wedetect_uni_base_finetune.py wedetect_base_uni.pth 8
+```
 
 ## 🙏 Acknowledgement
 
