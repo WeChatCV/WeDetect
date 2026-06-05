@@ -85,6 +85,7 @@ mim install mmdet==3.3.0
   - https://github.com/open-mmlab/mmcv/issues/3327
   - https://github.com/open-mmlab/mmcv/issues/3319
 - Both `mmcv==2.1.0`, `mmcv==2.2.0` and many other versions of PyTorch are compatible and work well.
+- We also provide an inference example code (`deploy/test_coco_pytorch.py`) that does not depend on mmdet. 
 
 
 ## ⭐ Demo
@@ -230,6 +231,12 @@ bash dist_train.sh config/wedetect_uni_base_finetune.py 8
 ```
 bash dist_test.sh config/wedetect_uni_base_finetune.py wedetect_base_uni.pth 8
 ```
+
+## 🔧 Deployment
+
+Please refer to the folder `deploy`.
+
+
 
 ## 🙏 Acknowledgement
 
