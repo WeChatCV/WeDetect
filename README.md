@@ -128,6 +128,10 @@ python infer_wedetect_ref.py --wedetect_ref_checkpoint /PATH/TO/WEDETECT_REF --w
 </p>
 
 
+## 🔧 Deployment
+
+Please refer to the folder `deploy`.
+
 
 ## 📏 Evaluation
 #### 📍 WeDetect
@@ -231,12 +235,6 @@ bash dist_train.sh config/wedetect_uni_base_finetune.py 8
 ```
 bash dist_test.sh config/wedetect_uni_base_finetune.py wedetect_base_uni.pth 8
 ```
-
-## 🔧 Deployment
-
-Please refer to the folder `deploy`.
-
-
 
 ## 🙏 Acknowledgement
 
