@@ -68,9 +68,23 @@ mim install mmcv==2.1.0
 mim install mmdet==3.3.0
 ```
 
+- 我们发现安装mmcv可能非常困难，这里是一些安装帮助信息:
+  - https://github.com/open-mmlab/mmcv/issues/3303
+  - https://github.com/open-mmlab/mmcv/issues/3327
+  - https://github.com/open-mmlab/mmcv/issues/3319
+- 只要安装`mmcv==2.1.0`或`mmcv==2.2.0`即可，pytorch版本也没有严格限制。
+- 我们同时提供了一份不依赖于mmdet的推理代码 (`deploy/test_coco_pytorch.py`)
 
 
 ## ⭐ Demo
+
+#### 📍 WeDetect-Anything
+
+我们在文件夹`wedetect_anything`中提供了相关的帮助信息和演示代码。
+
+<p align="left">
+    <img src="./assets/wedetect_anything4.png" width="800px">
+</p>
 
 #### 📍 WeDetect
 ```
@@ -109,6 +123,11 @@ python infer_wedetect_ref.py --wedetect_ref_checkpoint /PATH/TO/WEDETECT_REF --w
 - WeDetect-Ref基于WeDetect-Base-Uni训练，测试时应使用WeDetect-Base-Uni作为候选框提取网络。
 
 
+## 🔧 部署
+
+我们在文件夹`deploy`中提供了转换为onnx的脚本。
+
+
 ## 📏 评测
 #### 📍 WeDetect
 ```
@@ -144,7 +163,7 @@ python3 retrieval_metric.py --model wedetect --dataset coco --thre 0.2
 - 请您参见`wedetect_ref`文件夹
 
 
-## 在下游数据集上微调WeDetect
+## 🚀 在下游数据集上微调WeDetect
 
 - 请将数据集整理成coco格式，并且提供一个类似于`data/texts/coco_zh_class_texts.json`的类别名称文件，需要是中文。
 - 下面我们以coco2017数据集为例，展示如何微调。我们采用WeDetect-Base模型，并且使用8张GPU（24G及以下即可），每张GPU 4张图片，训练12个epoch。
@@ -179,6 +198,37 @@ bash dist_train.sh config/wedetect_base_coco_vision_encoder_8xbs4_2e-5.py 8
 | WeDetect-Base (OV-finetuning) | 55.7              | 73.3           | 60.8           | 38.0           | 61.1             | 72.8 |
 | WeDetect-Base (OV-finetuning mask refine) | 55.8  | 73.4           | 61.0           | 38.5           | 61.0             | 72.8 |
 | WeDetect-Base (CS-finetuning) | 56.2              | 73.9           | 61.6           | 39.1           | 61.7             | 73.7 |
+
+
+## 🚀 在下游数据集上微调WeDetect-Uni
+
+#### 📍 数据准备
+- 请将数据整理成COCO格式。
+- 数据集仅包含`object`这一个类
+    ```
+    [{'id': 0, 'synset': 'object', 'name': 'object'}]
+    ```
+- 每一个标注信息的`category_id`都应该是0。
+
+#### 📍 训练模型
+```
+bash dist_train.sh config/wedetect_uni_base_finetune.py 8
+```
+- 用户需要根据实际情况调整训练超参数。
+- 默认情况下，整个检测器的参数都是冻结住的，只有prompt是可学习的。用户可以将检测器的部分网络参数解冻，从而提高模型的性能，但是这样微调后，物体的特征将不再与文本特征对齐。
+- 下面是我们在COCO数据集上微调的结果
+
+| Trainable parameters     | AR@100 | AR@300 | 
+| ----------------------------- | ----------------- | ----------------- |
+| None (Zero-shot)     | 66.9              | 69.6           |
+| prompt | 67.6              | 69.6          |
+| prompt + head | 68.7  | 70.2           |
+| prompt + head + neck | 69.6              | 71.0           |
+
+#### 📍 模型测试
+```
+bash dist_test.sh config/wedetect_uni_base_finetune.py wedetect_base_uni.pth 8
+```
 
 
 ## 🙏 致谢

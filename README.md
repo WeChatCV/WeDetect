@@ -8,6 +8,8 @@ Here is the [中文版指南](./README_zh.md).
 
 ## 🔥 Update
 
+- [2026.06.07] 🔥🔥🔥 We release `WeDetect-Angthing`, which can automatically detect every object in the given image without any prompt!!! Feel free to try out our demo.
+- [2026.06.05] We release the onnx deployment code.
 - [2026.02.21] Our paper was accepted by CVPR2026.
 - [2026.02.06] We release the WeDetect finetuning code.
 - [2026.02.03] We release the first MLLM-based object embedding model [ObjEmbed](https://github.com/WeChatCV/ObjEmbed) based on WeDetect.
@@ -89,6 +91,14 @@ mim install mmdet==3.3.0
 
 
 ## ⭐ Demo
+
+#### 📍 WeDetect-Anything
+
+We provide instructions and gradio demos in the folder `wedetect_anything`. 
+
+<p align="left">
+    <img src="./assets/wedetect_anything4.png" width="800px">
+</p>
 
 #### 📍 WeDetect
 ```
