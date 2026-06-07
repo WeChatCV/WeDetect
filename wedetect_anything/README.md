@@ -148,14 +148,3 @@ UI 提供 `match_thr` / `score_thr` / `iou_thr` / `keep_top_k` 滑条，行为�
 <p align="left">
     <img src="../assets/wedetect_anything3.png" width="800px">
 </p>
----
-
-## 实现要点
-
-- **自包含**：`models.py` 不依赖 mmcv/mmdet，与 `deploy/test_coco_pytorch.py` 的结构保持一致，便于核对。
-- **候选模型与 deploy 模型的区别**：deploy 的 ONNX 以 `txt_feats` 为输入、输出按类得分；
-  而 Anything 的 ONNX **仅输入图像**（可学习 prompt 已内置），输出 `scores` / `bboxes` / `embeds`。
-- **每层对比常数**：strides 8/16/32 三个特征层各自的 `logit_scale.exp()` 与 `bias`，
-  导出时落盘到 `meta.json`，推理时按网格大小广播到每个候选框再用于文本匹配。
-- **权重重映射**：加载时把 mmdet 的 `backbone.image_model.model.` → `backbone.`、
-  `bbox_head.head_module.` → `bbox_head.`，并以 `strict=False` 容忍多余/缺失键。
