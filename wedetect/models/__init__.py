@@ -8,3 +8,4 @@ from .dense_heads import *  # noqa
 from .necks import *  # noqa
 from .assigner import *  # noqa
 from .task_modules import *
+from .distill import *  # noqa
